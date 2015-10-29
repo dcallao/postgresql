@@ -15,6 +15,12 @@
 # limitations under the License.
 #
 
+fix = Chef::Util::FileEdit.new("/opt/chef/embedded/lib/ruby/2.1.0/x86_64-linux/rbconfig.rb")
+
+fix.search_file_delete_line("^.*LIBPATHENV.*$")
+
+fix.write_file
+
 # Load the pgdgrepo_rpm_info method from libraries/default.rb
 ::Chef::Recipe.send(:include, Opscode::PostgresqlHelpers)
 
