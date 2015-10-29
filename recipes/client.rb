@@ -14,6 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+fix = Chef::Util::FileEdit.new("/opt/chef/embedded/lib/ruby/2.1.0/x86_64-linux/rbconfig.rb")
+
+fix.search_file_delete_line("^.*LIBPATHENV.*$")
+
+fix.write_file
 
 if platform_family?('debian') && node['postgresql']['version'].to_f > 9.3
   node.default['postgresql']['enable_pgdg_apt'] = true
